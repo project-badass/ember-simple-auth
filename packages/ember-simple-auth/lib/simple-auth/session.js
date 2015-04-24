@@ -257,6 +257,9 @@ export default Ember.ObjectProxy.extend(Ember.Evented, {
     @private
   */
   clear: function(trigger) {
+    // copy session data
+    var data = JSON.parse(JSON.stringify(this.content));
+
     trigger = !!trigger && this.get('isAuthenticated');
     this.beginPropertyChanges();
     this.setProperties({
@@ -267,7 +270,7 @@ export default Ember.ObjectProxy.extend(Ember.Evented, {
     this.updateStore();
     this.endPropertyChanges();
     if (trigger) {
-      this.trigger('sessionInvalidationSucceeded');
+      this.trigger('sessionInvalidationSucceeded', data);
     }
   },
 

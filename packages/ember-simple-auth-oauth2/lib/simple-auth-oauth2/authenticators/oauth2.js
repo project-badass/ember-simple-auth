@@ -180,7 +180,7 @@ export default Base.extend({
     function success(resolve) {
       Ember.run.cancel(_this._refreshTokenTimeout);
       delete _this._refreshTokenTimeout;
-      resolve();
+      resolve(data);
     }
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (Ember.isEmpty(_this.serverTokenRevocationEndpoint)) {
